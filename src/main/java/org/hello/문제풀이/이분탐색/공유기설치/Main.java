@@ -53,7 +53,7 @@ public class Main {
         System.out.println(answer);
     }
 
-    private static boolean check(int gap) {
+    private static boolean check(int gap) { // 단순하게 그리디 하게 해도 된다.
         int cnt = 1;
         int last = home[0];
         for(int i = 1; i < N; i++) {
