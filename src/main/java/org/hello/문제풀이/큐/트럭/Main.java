@@ -22,34 +22,24 @@ public class Main {
 
         trucks = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        Queue<Integer> bridge = new ArrayDeque<>(W); // 다리 크기
-        int bridgeWeight = 0;
+        Queue<Integer> bridge = new ArrayDeque<>(W);
+        for(int i = 0; i < W; i++) bridge.offer(0);
+        int idx = 0;
         int time = 0;
-        for(int i = 0; i < N; i++) {
-            int truck = trucks[i];
+        int weight = 0;
+        while(idx < N) {
             time++;
-            if(bridge.isEmpty()) { // 다리가 비어 있는 경우
-                bridge.offer(truck);
-                bridgeWeight += truck;
-            }else { // 다리가 비어 있지 않은 경우
-                if(bridge.size() == W) { // 이미 가득찬 경우
-                    bridgeWeight -= bridge.poll(); // 트럭 제거하기
-                }
-
-                if(bridge.size() < W && bridgeWeight + truck <= L) { // 현재 트럭을 다리에 실을 수 있는 경우
-                    bridge.offer(truck);
-                    bridgeWeight += truck;
-                }else { // 그렇지 않은 경우
-                    bridge.offer(0);
-                    i--;
-                }
+            weight -= bridge.poll();
+            int next = trucks[idx];
+            if(weight + next <= L) {
+                bridge.offer(next);
+                weight += next;
+                idx++;
+            }else {
+                bridge.offer(0);
             }
         }
 
-        if(!bridge.isEmpty()) { // 다리가 비어있지 않은 경우
-            time += W;
-        }
-
-        System.out.println(time);
+        System.out.println(time + W); // 마지막에 트럭이 지나가는 경우
     }
 }
