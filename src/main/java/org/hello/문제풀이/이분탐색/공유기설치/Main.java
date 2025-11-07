@@ -54,36 +54,15 @@ public class Main {
     }
 
     private static boolean check(int gap) {
-
-        int left = 0;
-        int right = 1;
-        boolean check = false;
-        while(left < right && right < N) {
-            int value = home[right] - home[left];
-            if(value < gap) {
-                right++;
-            }else { // 만족하는 경우
-                check = true;
-                break;
-            }
-        }
-
-        if(!check) return false;
-
-        int cnt = 0;
-        left = right;
-        right = left + 1;
-        while(left < right && right < N) {
-            int value = home[right] - home[left];
-            if(value < gap) {
-                right++;
-            }else {
+        int cnt = 1;
+        int last = home[0];
+        for(int i = 1; i < N; i++) {
+            if(home[i] - last >= gap) {
                 cnt++;
-                left = right;
-                right = left + 1;
+                last = home[i];
+                if(cnt >= C) return true;
             }
         }
-
-        return cnt >= C - 2;
+        return false;
     }
 }
