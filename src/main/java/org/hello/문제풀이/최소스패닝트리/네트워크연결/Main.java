@@ -11,6 +11,7 @@ public class Main { // 크루스칼
     private static int M;
     private static List<int[]> edges = new ArrayList<>();
     private static int[] parent;
+    private static int[] rank;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,13 +29,14 @@ public class Main { // 크루스칼
             int c = Integer.parseInt(st.nextToken());
 
             edges.add(new int[]{a,b,c});
-            edges.add(new int[]{b,a,c});
         }
 
         parent = new int[N + 1];
         for(int i = 1; i <= N; i++) {
             parent[i] = i;
         }
+
+        rank = new int[N + 1];
 
         edges.sort((a, b) -> { // 가중치 기반 정렬
             return a[2] - b[2];
@@ -44,21 +46,9 @@ public class Main { // 크루스칼
         int edgeCnt = 0;
 
         for(int[] edge : edges) {
-            int a = edge[0];
-            int b = edge[1];
-            int weight = edge[2];
-
-            if(edgeCnt == N - 1) {
-                break;
-            }
-
-            // 부모 확인
-            int parentA = find(a);
-            int parentB = find(b);
-            if(parentA != parentB) { // 같은 부모
-                answer += weight; // 가중치 더하고
-                union(a,b); // 부모 통합하고
-                edgeCnt++;
+            if(union(edge[0], edge[1])) {
+                answer += edge[2];
+                if(++edgeCnt == N - 1) break;
             }
         }
 
@@ -73,19 +63,27 @@ public class Main { // 크루스칼
         return parent[n] = find(parent[n]);
     }
 
-    private static void union(int a, int b) {
+    private static boolean union(int a, int b) {
 
         int parentA = find(a);
         int parentB = find(b);
 
         if(parentA == parentB) {
-            return;
+            return false;
         }
 
-        if(parentA < parentB) {
-            parent[parentB] = parentA;
-        }else {
-            parent[parentA] = parentB;
+        if(rank[parentA] < rank[parentB]) {
+            int t = parentA;
+            parentA = parentB;
+            parentB = t;
         }
+
+        parent[parentB] = parentA;
+
+        if(rank[parentA] == rank[parentB]) {
+            rank[parentA]++;
+        }
+
+        return true;
     }
 }
