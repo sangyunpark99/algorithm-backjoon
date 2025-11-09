@@ -32,17 +32,12 @@ public class Main {
                 if(possible[i]) diff.add(i);
             }
 
-            boolean[] next = new boolean[sum + 1];
-
             for(int d: diff) { // 차이 값을 기준으로
-                next[d] = true;
                 int d1 = Math.abs(d - weight); // 주어진 무게를 왼쪽 저울에 놓는 경우
                 int d2 = d + weight; // 주어진 무게를 오른쪽에 놓는 경우
-                if(d1 <= sum) next[d1] = true;
-                if(d2 <= sum) next[d2] = true;
+                possible[d1] = true;
+                possible[d2] = true;
             }
-
-            possible = next;
         }
 
         int k = Integer.parseInt(br.readLine());
