@@ -26,7 +26,7 @@ public class Main {
 
             dp[0] = 1;
 
-            for(int coin: coins) { // 갯수 유한
+            for(int coin: coins) { // 갯수 무한
                 for(int i = coin; i <= M; i++) {
                     dp[i] += dp[i - coin];
                 }
