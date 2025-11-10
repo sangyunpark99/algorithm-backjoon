@@ -42,7 +42,7 @@ public class Main {
             int cost = city[0];
             int person = city[1]; // 1명
             for(int i = person; i <= C + maxPerson; i++) { // C명 까지
-                if(dp[i - person] != Integer.MAX_VALUE) {
+                if(dp[i - person] != Integer.MAX_VALUE) { // 오버 플로우 방지
                     dp[i] = Math.min(dp[i], dp[i - person] + cost);
                 }
             }
