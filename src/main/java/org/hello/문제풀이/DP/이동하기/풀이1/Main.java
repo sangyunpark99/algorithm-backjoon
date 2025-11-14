@@ -1,4 +1,4 @@
-package org.hello.문제풀이.DP.이동하기;
+package org.hello.문제풀이.DP.이동하기.풀이1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
