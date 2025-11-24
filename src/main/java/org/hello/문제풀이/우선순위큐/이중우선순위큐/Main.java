@@ -57,7 +57,7 @@ public class Main {
                 sb.append(maxQueue.poll()).append(" ").append(minQueue.poll()).append("\n");
             }
 
-            System.out.println(sb);
+            System.out.print(sb);
         }
     }
 
