@@ -77,7 +77,7 @@ public class Main {
             int a = bridge[0];
             int b = bridge[1];
             int weight = bridge[2];
-            if(find(a) != find(b)) { // 연결 안됨?>
+            if(find(a) != find(b)) { // 연결 안됨?
                 answer += weight;
                 union(a,b);
             }
