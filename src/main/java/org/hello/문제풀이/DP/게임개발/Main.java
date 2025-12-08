@@ -49,13 +49,12 @@ public class Main {
         while(!queue.isEmpty()) {
             int cur = queue.poll();
             for(int next : build.get(cur)) {
-                cost[next] = Math.max(cost[next], cost[cur] + time[next]);
+                cost[next] = Math.max(cost[next], cost[cur] + time[next]); // 매번 비용 갱신
                 if(--buildCnt[next] == 0) {
                     queue.offer(next);
                 }
             }
         }
-
 
         for(int i = 1; i <= N; i++) {
             System.out.println(cost[i]);
