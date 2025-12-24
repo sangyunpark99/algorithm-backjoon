@@ -30,7 +30,7 @@ public class Main {
             long value = high[i];
 
             if(stack.isEmpty()) {
-                stack.add(i); // 인덱스
+                stack.add(i);
                 continue;
             }
 
