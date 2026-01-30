@@ -48,7 +48,7 @@ public class Main {
         int p = parent[value];
         int root = findParent(p);
 
-        dist[value] += dist[p]; // 루트에서 현재 노드 까지의 거리
+        dist[value] += dist[p];
         parent[value] = root;
 
         return root;
