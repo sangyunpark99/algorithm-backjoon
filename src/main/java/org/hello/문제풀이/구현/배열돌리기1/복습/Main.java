@@ -1,4 +1,4 @@
-package org.hello.문제풀이.구현.배열돌리기1;
+package org.hello.문제풀이.구현.배열돌리기1.복습;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,15 +46,16 @@ public class Main {
     private static void rotate() {
         int layers = Math.min(N, M) / 2;
 
-        for(int k = 0; k < layers; k++) { // 계층
+        for(int k = 0; k < layers; k++) {
             int top = k;
-            int left = k;
             int bottom = N - 1 - k;
+            int left = k;
             int right = M - 1 - k;
 
             ArrayList<Integer> list = new ArrayList<>();
 
-            // 배열 테두리 추출
+            // 반시계 방향 이므로
+
             for(int y = top; y <= bottom; y++) {
                 list.add(map[y][left]);
             }
@@ -72,24 +73,23 @@ public class Main {
             }
 
             int len = list.size();
-            int shift = R % len;
+            int shift = R % len; // 이동 횟수
 
             int idx = 0;
 
-            // 값 옮기기
-            for (int y = top; y <= bottom; y++){
+            for(int y = top; y <= bottom; y++) {
                 map[y][left] = list.get((idx++ - shift + len) % len);
             }
 
-            for (int x = left + 1; x <= right; x++){
+            for(int x = left + 1; x <= right; x++) {
                 map[bottom][x] = list.get((idx++ - shift + len) % len);
             }
 
-            for (int y = bottom - 1; y >= top; y--){
+            for(int y = bottom - 1; y >= top; y--) {
                 map[y][right] = list.get((idx++ - shift + len) % len);
             }
 
-            for (int x = right - 1; x >= left + 1; x--){
+            for(int x = right - 1; x >= left + 1; x--) {
                 map[top][x] = list.get((idx++ - shift + len) % len);
             }
         }
